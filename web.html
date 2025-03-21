@@ -1,0 +1,38 @@
+<!doctype html>
+
+<head>
+  <title>OpenUUP</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="/sakura.css" />
+</head>
+
+<body>
+  <h1>OpenUUP</h1>
+  <p>Yes, this is a lame web UI that only allows viewing the known builds. Use the /json-api for everything else. It is documented <a href="https://git.uupdump.net/uup-dump/json-api#uup-dump-json-api">here</a>.</p>
+  <p>As an example, GET <a href="/json-api/listid.php">/json-api/listid.php</a> to get the same known builds as displayed below.</p>
+  <p id="status">Loading...</p>
+  <ul id="builds"></ul>
+  <script>
+    (async () => {
+      let status = document.querySelector("#status");
+      let builds = document.querySelector("#builds");
+      try {
+        let allBuilds = await fetch("/json-api/listid.php");
+        let allBuildsJSON = await allBuilds.json();
+        if (allBuildsJSON.response.builds.length == 0) {
+          let emptyText = document.createElement("li");
+          emptyText.textContent = "Hmm, looks like there's no builds. Make sure /fileinfo and /packs are mounted!"
+          builds.append(emptyText);
+        }
+        allBuildsJSON.response.builds.forEach(build => {
+          let buildText = document.createElement("li");
+          buildText.textContent = build.title;
+          builds.append(buildText);
+        });
+        status.style.display = "none";
+      } catch (err) {
+        status.textContent += `error! Got "${err}". Check the browser console.`;
+      }
+    })();
+  </script>
+</body>
