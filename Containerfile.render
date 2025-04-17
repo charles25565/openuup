@@ -13,4 +13,4 @@ RUN ln -s /fileinfo /openuup/json-api/fileinfo
 RUN ln -s /packs /openuup/json-api/packs
 EXPOSE 80
 VOLUME ["/fileinfo", "/packs"]
-CMD /usr/bin/php -S 0.0.0.0:80 -t /openuup
+CMD /usr/bin/php -S 0.0.0.0:10000 -t /openuup
