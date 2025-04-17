@@ -11,6 +11,6 @@ COPY --from=cloner /builds/fileinfo /fileinfo
 COPY --from=cloner /builds/packs /packs
 RUN ln -s /fileinfo /openuup/json-api/fileinfo
 RUN ln -s /packs /openuup/json-api/packs
-EXPOSE 80
+EXPOSE 10000
 VOLUME ["/fileinfo", "/packs"]
 CMD /usr/bin/php -S 0.0.0.0:10000 -t /openuup
