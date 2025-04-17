@@ -1,0 +1,12 @@
+name: Automatic deploy
+
+on:
+  schedule:
+    - cron: '0 0 */3 * *'
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Deploy
+        run: curl -s ${{secrets.RENDER_DEPLOY_HOOK}} > /dev/null
