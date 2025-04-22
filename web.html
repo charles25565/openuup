@@ -26,7 +26,7 @@
         }
         allBuildsJSON.response.builds.forEach(build => {
           let buildText = document.createElement("li");
-          buildText.textContent = build.title;
+          buildText.textContent = build.title + " [" + build.arch + "]";
           builds.append(buildText);
         });
         status.style.display = "none";
