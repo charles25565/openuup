@@ -1,7 +1,7 @@
 FROM cgr.dev/chainguard/wolfi-base:latest AS cloner
 RUN apk add git
-RUN git clone --depth=1 --recurse-submodules https://git.uupdump.net/uup-dump/json-api.git
-RUN git clone --depth=1 https://github.com/charles25565/builds.git
+RUN git clone --depth=1 --single-branch --branch=master --recurse-submodules https://git.uupdump.net/uup-dump/json-api.git
+RUN git clone --depth=1 --single-branch --branch=main https://github.com/charles25565/builds.git
 FROM cgr.dev/chainguard/wolfi-base:latest AS openuup
 RUN apk add php-8.4 7zip
 COPY web.html /openuup/index.html
